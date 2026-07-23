@@ -123,18 +123,22 @@ h2 {
 }
 
 .paper {
+  position: relative;
   border-bottom: 1px solid #dce5ed;
   padding-top: 30px;
   padding-bottom: 30px;
 }
 
 .paper details > summary {
-  display: flex;
+  position: absolute;
+  top: 30px;
+  right: max(24px, calc((100% - 1080px) / 2));
+  display: grid;
+  width: 36px;
+  height: 36px;
   cursor: pointer;
   list-style: none;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 20px;
+  place-items: center;
 }
 
 .paper details > summary::-webkit-details-marker {
@@ -143,7 +147,6 @@ h2 {
 
 .paper details > summary::after {
   content: "⌃";
-  flex: 0 0 auto;
   color: var(--navy);
   font-size: 21px;
   line-height: 1;
@@ -152,6 +155,14 @@ h2 {
 
 .paper details:not([open]) > summary::after {
   transform: rotate(180deg);
+}
+
+.paper-title-row {
+  display: flex;
+  padding-right: 48px;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 8px;
 }
 
 .paper-title {
@@ -164,13 +175,12 @@ h2 {
 }
 
 .status {
-  margin-left: auto;
-  color: #000;
+  color: var(--ink);
   font-size: 18px;
 }
 
 .paper-body {
-  padding-top: 8px;
+  padding-top: 10px;
 }
 
 .paper-body p {
@@ -179,9 +189,11 @@ h2 {
 
 .paper-links {
   display: flex;
+  margin-top: 3px;
+  margin-bottom: 5px;
   flex-wrap: wrap;
-  gap: 4px 12px;
-  font-size: 18px;
+  gap: 3px 9px;
+  font-size: 16.5px;
   font-weight: 700;
 }
 
@@ -219,15 +231,24 @@ h2 {
 
 .wip h3 {
   margin-bottom: 4px;
-  color: var(--blue);
-  font-size: 18.7px;
+  color: var(--ink);
+  font-size: 17px;
   line-height: 1.4;
-  text-decoration: underline;
 }
 
 .wip p {
   margin-bottom: 0;
   font-style: italic;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .appendix-page {
@@ -294,11 +315,11 @@ h2 {
   }
 
   .paper details > summary {
-    align-items: flex-start;
+    right: 16px;
   }
 
   .status {
-    display: none;
+    font-size: 16px;
   }
 
   .appendix-heading {

@@ -250,7 +250,7 @@ export default function Home() {
               </p>
               <p>Always happy to talk about these topics, please reach out!</p>
               <p>
-                Email:{" "}
+                <strong>Email:</strong>{" "}
                 <a href="mailto:tom.schwantje@unibocconi.it">
                   tom.schwantje@unibocconi.it
                 </a>
@@ -270,31 +270,34 @@ export default function Home() {
 
         {papers.map((paper) => (
           <article className="paper section" key={paper.title}>
-            <details open>
+            <div className="paper-title-row">
+              <span className="paper-title">{paper.title}</span>
+              {paper.status && <span className="status">{paper.status}</span>}
+            </div>
+            <p className="paper-links">
+              {paper.links.map((link) => (
+                <ExternalLink href={link.href} key={link.label}>
+                  [{link.label}]
+                </ExternalLink>
+              ))}
+              {paper.appendix && (
+                <Link href="/banking-conflict-appendix/">[Online Appendix]</Link>
+              )}
+            </p>
+            {paper.authors && <p className="authors">{paper.authors}</p>}
+            <details>
               <summary>
-                <span className="paper-title">{paper.title}</span>
-                {paper.status && <span className="status">{paper.status}</span>}
+                <span className="visually-hidden">
+                  Show details for {paper.title}
+                </span>
               </summary>
               <div className="paper-body">
-                <p className="paper-links">
-                  {paper.links.map((link) => (
-                    <ExternalLink href={link.href} key={link.label}>
-                      [{link.label}]
-                    </ExternalLink>
-                  ))}
-                </p>
-                {paper.authors && <p className="authors">{paper.authors}</p>}
                 <p className="presentations">
                   <em>Presentations:</em> {paper.presentations}
                 </p>
                 <p className="abstract">
                   <span>Abstract:</span> {paper.abstract}
                 </p>
-                {paper.appendix && (
-                  <p>
-                    <Link href="/banking-conflict-appendix/">Online Appendix</Link>
-                  </p>
-                )}
               </div>
             </details>
           </article>
