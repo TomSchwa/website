@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Banking under Conflict — Online Appendix | Tom Schwantje",
@@ -9,13 +8,6 @@ export const metadata: Metadata = {
 export default function AppendixPage() {
   return (
     <main className="appendix-page">
-      <header className="site-header">
-        <div className="header-inner">
-          <Link className="site-name" href="/">
-            Tom Schwantje
-          </Link>
-        </div>
-      </header>
       <section className="section appendix-shell">
         <div className="appendix-heading">
           <h1>Banking under Conflict — Online Appendix</h1>
