@@ -15,7 +15,7 @@ type Paper = {
   appendix?: boolean;
 };
 
-const papers: Paper[] = [
+const paperCatalog: Paper[] = [
   {
     title: "Management as Rules: Evidence from an adaptive Bayesian questionnaire",
     links: [
@@ -181,6 +181,15 @@ const papers: Paper[] = [
   },
 ];
 
+const papers = [
+  ...paperCatalog.filter((paper) =>
+    paper.title.startsWith("Banking under Conflict"),
+  ),
+  ...paperCatalog.filter(
+    (paper) => !paper.title.startsWith("Banking under Conflict"),
+  ),
+];
+
 function ExternalLink({ href, children }: React.PropsWithChildren<{ href: string }>) {
   return (
     <a href={href} target="_blank" rel="noreferrer">
@@ -194,9 +203,6 @@ export default function Home() {
     <>
       <header className="site-header">
         <div className="header-inner">
-          <a className="site-name" href="#top">
-            Tom Schwantje
-          </a>
           <nav aria-label="Main navigation">
             <a href="#working-papers">Working papers</a>
             <a href="#work-in-progress">Work in progress</a>

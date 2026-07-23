@@ -1,11 +1,11 @@
 :root {
-  --ink: #212121;
-  --muted: #6a6a6a;
-  --brown: #857251;
-  --brown-dark: #74664d;
-  --blue: #073763;
-  --rule: #cccccc;
-  --wash: #f7f4ee;
+  --ink: #1d2b38;
+  --muted: #53697d;
+  --navy: #173b5d;
+  --navy-dark: #0d2d49;
+  --blue: #0b3a66;
+  --rule: #c8d4df;
+  --wash: #edf3f8;
 }
 
 * {
@@ -18,7 +18,7 @@ html {
 
 body {
   margin: 0;
-  background: #ffffff;
+  background: #fbfdff;
   color: var(--ink);
   font-family: "Open Sans", Arial, sans-serif;
   font-size: 16px;
@@ -26,13 +26,13 @@ body {
 }
 
 a {
-  color: var(--brown-dark);
+  color: var(--navy-dark);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
 a:hover {
-  color: #82683f;
+  color: #245d8f;
 }
 
 .site-header {
@@ -40,7 +40,7 @@ a:hover {
   z-index: 10;
   top: 0;
   border-bottom: 1px solid var(--rule);
-  background: rgba(255, 255, 255, 0.96);
+  background: rgba(247, 250, 253, 0.97);
 }
 
 .header-inner {
@@ -49,17 +49,8 @@ a:hover {
   min-height: 64px;
   margin: 0 auto;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 30px;
-}
-
-.site-name {
-  color: var(--brown);
-  font-family: Roboto, Arial, sans-serif;
-  font-size: 20px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  text-decoration: none;
 }
 
 nav {
@@ -105,7 +96,7 @@ p {
 
 h1,
 h2 {
-  color: var(--brown);
+  color: var(--navy);
   font-family: Roboto, Arial, sans-serif;
 }
 
@@ -132,7 +123,7 @@ h2 {
 }
 
 .paper {
-  border-bottom: 1px solid #e8e5df;
+  border-bottom: 1px solid #dce5ed;
   padding-top: 30px;
   padding-bottom: 30px;
 }
@@ -153,7 +144,7 @@ h2 {
 .paper details > summary::after {
   content: "⌃";
   flex: 0 0 auto;
-  color: var(--brown);
+  color: var(--navy);
   font-size: 21px;
   line-height: 1;
   transition: transform 0.2s ease;
