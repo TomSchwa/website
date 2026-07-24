@@ -122,10 +122,11 @@ const paperCatalog: Paper[] = [
       <>
         10th CSEF-IGIER Symposium on Economics and Institutions*, EEA Congress
         2025, CEPR-IMO Workshop (Bocconi), CEPR Governance in a Polarized World
-        (POLECONFIN), EBRD Office of the Chief Economist Seminar, CEPR Symposium
-        (* if by coauthor), Working Group in African Political Economy; 8th
+        (POLECONFIN), EBRD Office of the Chief Economist Seminar, CEPR Symposium,
+        Working Group in African Political Economy; 8th
         EBRD-CEPR Research Symposium: The Frontiers of finance in emerging
-        markets; Groningen internal seminar; SIOE 2026 Conference.
+        markets; Groningen internal seminar; SIOE 2026 Conference. (* if by
+        coauthor)
       </>
     ),
     abstract: (
