@@ -3,6 +3,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Banking under Conflict — Online Appendix | Tom Schwantje",
   description: "Online appendix for Banking under Conflict.",
+  alternates: {
+    canonical: "/banking-conflict-appendix/",
+  },
 };
 
 export default function AppendixPage() {
