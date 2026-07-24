@@ -16,8 +16,15 @@ export const metadata: Metadata = {
     images: ["./bocconi.png"],
   },
   icons: {
-    icon: "/bocconi.png",
-    shortcut: "/bocconi.png",
+    icon: [
+      {
+        url: "/bocconi-favicon.png",
+        type: "image/png",
+        sizes: "32x32",
+      },
+    ],
+    shortcut: "/bocconi-favicon.png",
+    apple: "/bocconi-favicon.png",
   },
 };
 

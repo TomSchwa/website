@@ -203,6 +203,15 @@ export default function Home() {
     <>
       <header className="site-header">
         <div className="header-inner">
+          <a
+            className="bocconi-logo"
+            href="https://www.unibocconi.it/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Bocconi University"
+          >
+            <img src="/bocconi.png" alt="Bocconi University" />
+          </a>
           <nav aria-label="Main navigation">
             <a href="#working-papers">Working papers</a>
             <a href="#work-in-progress">Work in progress</a>
