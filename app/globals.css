@@ -15,6 +15,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 84px;
 }
 
 body {
@@ -23,15 +24,18 @@ body {
   color: var(--ink);
   font-family: Inter, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
-  line-height: 1.6;
+  line-height: 1.62;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 a {
   color: var(--navy);
   text-decoration: underline;
   text-decoration-color: #9eafbf;
-  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 150ms ease, text-decoration-color 150ms ease;
 }
 
 a:hover {
@@ -39,13 +43,16 @@ a:hover {
   text-decoration-color: currentColor;
 }
 
+a:focus-visible,
+summary:focus-visible {
+  border-radius: 2px;
+  outline: 3px solid rgba(18, 52, 91, 0.22);
+  outline-offset: 4px;
+}
+
 .site-header {
-  position: sticky;
-  z-index: 10;
-  top: 0;
   border-bottom: 1px solid var(--rule);
   background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(10px);
 }
 
 .header-inner {
@@ -72,6 +79,7 @@ a:hover {
 
 nav {
   display: flex;
+  align-items: center;
   gap: 30px;
 }
 
@@ -79,21 +87,27 @@ nav a {
   color: var(--steel);
   font-size: 13px;
   font-weight: 650;
-  letter-spacing: 0.015em;
+  letter-spacing: 0.035em;
   text-decoration: none;
+  text-transform: uppercase;
 }
 
 nav a:hover {
   color: var(--navy);
 }
 
-.section {
-  padding: 32px max(32px, calc((100% - 1120px) / 2));
+.home-main {
+  width: min(calc(100% - 64px), 1120px);
+  margin: 0 auto;
+}
+
+.home-main .section {
+  padding-right: 0;
+  padding-left: 0;
 }
 
 .intro {
-  padding-top: 66px;
-  padding-bottom: 62px;
+  padding: 66px 0 62px;
   border-bottom: 1px solid var(--rule-strong);
 }
 
@@ -105,16 +119,19 @@ nav a:hover {
 }
 
 .portrait-wrap {
+  width: 212px;
+  aspect-ratio: 3 / 4;
   overflow: hidden;
   background: var(--wash);
 }
 
 .portrait-wrap img {
   display: block;
-  width: 212px;
-  max-width: none;
-  height: auto;
-  filter: saturate(0.9) contrast(1.02);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 36%;
+  filter: saturate(0.88) contrast(1.02);
 }
 
 h1,
@@ -131,100 +148,103 @@ h2 {
 }
 
 h1 {
-  margin-bottom: 26px;
-  font-size: clamp(38px, 4vw, 48px);
-  font-weight: 750;
+  margin-bottom: 24px;
+  font-size: clamp(40px, 4vw, 54px);
+  font-weight: 680;
   letter-spacing: -0.035em;
   line-height: 1.08;
 }
 
+.bio {
+  max-width: 760px;
+}
+
 .bio p {
-  max-width: 820px;
-  margin-bottom: 15px;
-  color: #354258;
-  font-size: 16.5px;
-  line-height: 1.62;
+  margin: 0 0 13px;
+  color: #374457;
+  font-size: 16px;
+}
+
+.bio .job-market-note {
+  color: var(--navy);
+  font-weight: 650;
+}
+
+.contact {
+  display: flex;
+  margin-top: 22px;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  font-size: 14px;
+  font-weight: 620;
+}
+
+.contact p {
+  margin: 0;
+  font-size: inherit;
+}
+
+.contact a {
+  border-bottom: 1px solid #aab8c5;
+  text-decoration: none;
 }
 
 .section-heading {
-  padding-top: 60px;
-  padding-bottom: 24px;
+  padding-top: 54px;
+  padding-bottom: 12px;
   background: #ffffff;
 }
 
 h2 {
   margin-bottom: 0;
-  font-size: 30px;
-  font-weight: 750;
-  letter-spacing: -0.025em;
-  line-height: 1.2;
+  font-size: 25px;
+  font-weight: 690;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
 }
 
 .paper {
   position: relative;
   border-bottom: 1px solid var(--rule);
-  padding-top: 28px;
-  padding-bottom: 28px;
+  padding-top: 27px;
+  padding-bottom: 29px;
 }
 
-.paper details > summary {
-  position: absolute;
-  top: 26px;
-  right: max(32px, calc((100% - 1120px) / 2));
-  display: grid;
-  width: 34px;
-  height: 34px;
-  cursor: pointer;
-  list-style: none;
-  place-items: center;
-}
-
-.paper details > summary::-webkit-details-marker {
-  display: none;
-}
-
-.paper details > summary::after {
-  content: "⌄";
+.paper-details {
+  margin-top: 8px;
   color: var(--steel);
-  font-size: 19px;
-  line-height: 1;
-  transition: transform 0.2s ease;
+  font-size: 13px;
 }
 
-.paper details[open] > summary::after {
-  transform: rotate(180deg);
+.paper-details > summary {
+  width: max-content;
+  cursor: pointer;
+  font-weight: 620;
+  list-style-position: outside;
 }
 
 .paper-title-row {
-  display: flex;
-  padding-right: 48px;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px 12px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
 }
 
 .paper-title {
   color: var(--ink);
-  font-size: 20px;
-  font-weight: 730;
+  font-size: 19px;
+  font-weight: 680;
   letter-spacing: -0.012em;
-  line-height: 1.35;
+  line-height: 1.38;
 }
 
 .status {
-  display: inline-flex;
-  min-height: 25px;
-  padding: 3px 9px;
-  align-items: center;
-  border: 1px solid #cfdae4;
-  border-radius: 999px;
-  background: #eef3f7;
-  color: #4b627a;
-  font-size: 11px;
-  font-weight: 750;
-  letter-spacing: 0.08em;
-  line-height: 1;
-  text-transform: uppercase;
+  justify-self: end;
+  margin-top: 1px;
+  color: var(--muted);
+  font-size: 13px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.35;
 }
 
 .paper-body {
@@ -237,18 +257,22 @@ h2 {
 
 .paper-links {
   display: flex;
-  margin-top: 9px;
-  margin-bottom: 7px;
+  margin-top: 8px;
+  margin-bottom: 5px;
   flex-wrap: wrap;
-  gap: 4px 12px;
-  font-size: 14.5px;
-  font-weight: 700;
+  gap: 3px 11px;
+  font-size: 13px;
+  font-weight: 620;
+}
+
+.paper-links a {
+  text-decoration: none;
 }
 
 .authors {
-  margin-bottom: 3px;
+  margin-bottom: 0;
   color: var(--muted);
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .presentations {
@@ -258,10 +282,10 @@ h2 {
 }
 
 .abstract {
-  max-width: 980px;
-  color: #3f4b5d;
+  max-width: 800px;
+  color: #4b5869;
   font-size: 14px;
-  line-height: 1.65;
+  line-height: 1.62;
 }
 
 .abstract > span {
@@ -269,34 +293,36 @@ h2 {
 }
 
 .wip {
-  padding-top: 58px;
-  padding-bottom: 76px;
-  border-top: 1px solid var(--rule-strong);
-  background: var(--wash);
+  padding-top: 56px;
+  padding-bottom: 72px;
+  background: #ffffff;
 }
 
 .wip h2 {
-  margin-bottom: 32px;
+  margin-bottom: 19px;
 }
 
-.wip-item + .wip-item {
-  margin-top: 26px;
+.wip-list {
+  border-top: 1px solid var(--rule);
+}
+
+.wip-item {
+  padding: 19px 0;
+  border-bottom: 1px solid var(--rule);
 }
 
 .wip h3 {
-  margin-bottom: 5px;
+  margin-bottom: 0;
   color: var(--ink);
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  line-height: 1.4;
+  font-size: 16px;
+  font-weight: 640;
+  line-height: 1.45;
 }
 
 .wip p {
-  margin-bottom: 0;
+  margin: 3px 0 0;
   color: var(--muted);
-  font-size: 15px;
-  font-style: italic;
+  font-size: 13px;
 }
 
 .visually-hidden {
@@ -312,6 +338,11 @@ h2 {
 .appendix-page {
   min-height: 100vh;
   background: var(--wash);
+}
+
+.appendix-page .section {
+  padding-right: max(32px, calc((100% - 1120px) / 2));
+  padding-left: max(32px, calc((100% - 1120px) / 2));
 }
 
 .appendix-shell {
@@ -342,8 +373,8 @@ h2 {
 
 @media (max-width: 700px) {
   .header-inner {
-    width: calc(100% - 40px);
-    min-height: 62px;
+    width: min(calc(100% - 36px), 1120px);
+    min-height: 60px;
   }
 
   .bocconi-logo img {
@@ -351,16 +382,15 @@ h2 {
   }
 
   nav {
-    gap: 14px;
+    gap: 16px;
   }
 
   nav a {
     font-size: 11px;
   }
 
-  .section {
-    padding-right: 20px;
-    padding-left: 20px;
+  .home-main {
+    width: min(calc(100% - 36px), 1120px);
   }
 
   .intro {
@@ -373,43 +403,65 @@ h2 {
     gap: 25px;
   }
 
-  .portrait-wrap img {
+  .portrait-wrap {
     width: 108px;
   }
 
-  h1 {
-    margin-bottom: 20px;
-    font-size: 34px;
+  .portrait-wrap img {
+    width: 100%;
   }
 
-  .bio p {
-    font-size: 15px;
-    line-height: 1.58;
+  h1 {
+    font-size: 36px;
+  }
+
+  .bio {
+    display: contents;
+  }
+
+  .bio-copy,
+  .contact {
+    grid-column: 1 / -1;
+  }
+
+  .bio-copy {
+    margin-top: 4px;
+  }
+
+  .contact {
+    margin-top: 7px;
   }
 
   .section-heading {
-    padding-top: 46px;
-    padding-bottom: 18px;
+    padding-top: 43px;
+    padding-bottom: 12px;
   }
 
   h2 {
-    font-size: 26px;
+    font-size: 25px;
   }
 
-  .paper details > summary {
-    right: 15px;
+  .paper {
+    padding-top: 24px;
+    padding-bottom: 24px;
   }
 
   .paper-title {
-    font-size: 18px;
+    font-size: 19px;
   }
 
   .status {
-    font-size: 10px;
+    justify-self: start;
+    font-size: 13px;
   }
 
   .appendix-heading {
     display: block;
+  }
+
+  .appendix-page .section {
+    padding-right: 20px;
+    padding-left: 20px;
   }
 
   .appendix-heading a {
@@ -436,11 +488,21 @@ h2 {
     gap: 18px;
   }
 
-  .portrait-wrap img {
+  .portrait-wrap {
     width: 88px;
   }
 
   h1 {
-    font-size: 30px;
+    font-size: 31px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  * {
+    transition: none !important;
   }
 }

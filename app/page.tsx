@@ -125,8 +125,7 @@ const paperCatalog: Paper[] = [
         (POLECONFIN), EBRD Office of the Chief Economist Seminar, CEPR Symposium
         (* if by coauthor), Working Group in African Political Economy; 8th
         EBRD-CEPR Research Symposium: The Frontiers of finance in emerging
-        markets; <strong>Upcoming:</strong> Groningen internal seminar; SIOE 2026
-        Conference.
+        markets; Groningen internal seminar; SIOE 2026 Conference.
       </>
     ),
     abstract: (
@@ -181,20 +180,58 @@ const paperCatalog: Paper[] = [
   },
 ];
 
-const papers = [
-  ...paperCatalog.filter((paper) =>
-    paper.title.startsWith("Banking under Conflict"),
-  ),
-  ...paperCatalog.filter(
-    (paper) => !paper.title.startsWith("Banking under Conflict"),
-  ),
-];
+const jobMarketPaper = paperCatalog.find((paper) =>
+  paper.title.startsWith("Banking under Conflict"),
+);
+
+const papers = paperCatalog.filter(
+  (paper) => !paper.title.startsWith("Banking under Conflict"),
+);
 
 function ExternalLink({ href, children }: React.PropsWithChildren<{ href: string }>) {
   return (
     <a href={href} target="_blank" rel="noreferrer">
       {children}
     </a>
+  );
+}
+
+function PaperEntry({
+  paper,
+  defaultOpen = false,
+}: {
+  paper: Paper;
+  defaultOpen?: boolean;
+}) {
+  return (
+    <article className="paper section">
+      <div className="paper-title-row">
+        <span className="paper-title">{paper.title}</span>
+        {paper.status && <span className="status">{paper.status}</span>}
+      </div>
+      <p className="paper-links">
+        {paper.links.map((link) => (
+          <ExternalLink href={link.href} key={link.label}>
+            [{link.label}]
+          </ExternalLink>
+        ))}
+        {paper.appendix && (
+          <Link href="/banking-conflict-appendix/">[Online Appendix]</Link>
+        )}
+      </p>
+      {paper.authors && <p className="authors">{paper.authors}</p>}
+      <details className="paper-details" open={defaultOpen}>
+        <summary>Abstract</summary>
+        <div className="paper-body">
+          <p className="presentations">
+            <em>Presentations:</em> {paper.presentations}
+          </p>
+          <p className="abstract">
+            <span>Abstract:</span> {paper.abstract}
+          </p>
+        </div>
+      </details>
+    </article>
   );
 }
 
@@ -213,13 +250,14 @@ export default function Home() {
             <img src="/bocconi.png" alt="Bocconi University" />
           </a>
           <nav aria-label="Main navigation">
+            <a href="#job-market-paper">Job market paper</a>
             <a href="#working-papers">Working papers</a>
             <a href="#work-in-progress">Work in progress</a>
           </nav>
         </div>
       </header>
 
-      <main id="top">
+      <main id="top" className="home-main">
         <section className="intro section">
           <div className="intro-grid">
             <div className="portrait-wrap">
@@ -232,97 +270,81 @@ export default function Home() {
             </div>
             <div className="bio">
               <h1>Tom Schwantje</h1>
-              <p>
-                I am a Postdoctoral Research Fellow at Bocconi University, where I
-                am affiliated with{" "}
-                <ExternalLink href="https://igier.unibocconi.eu">IGIER</ExternalLink>{" "}
-                and{" "}
-                <ExternalLink href="https://baffi.unibocconi.eu/research-units/finafrica">
-                  FINAFRICA
-                </ExternalLink>
-                .
-              </p>
-              <p>
-                My primary fields of interest are organisational economics and
-                management, and their applications to development economics and
-                finance. I am interested in the role organisations play in economic
-                development both in their own right and by contributing to broader
-                social objectives, and how their internal organisation supports
-                this. My research increasingly focuses on the role of the financial
-                sector in this process.
-              </p>
-              <p>
-                Many of my projects develop new (Bayesian) tools to measure
-                management, such as the rules managers use to make decisions,
-                management practices in banks, and management styles among young
-                professionals.
-              </p>
-              <p>Always happy to talk about these topics, please reach out!</p>
-              <p>
-                <strong>Email:</strong>{" "}
-                <a href="mailto:tom.schwantje@unibocconi.it">
-                  tom.schwantje@unibocconi.it
-                </a>
-              </p>
-              <p>
-                <ExternalLink href="./files/Tom_Schwantje_CV.pdf">
-                  Curriculum Vitae
-                </ExternalLink>
-              </p>
+              <div className="bio-copy">
+                <p>
+                  I am a Postdoctoral Research Fellow at Bocconi University, where I
+                  am affiliated with{" "}
+                  <ExternalLink href="https://igier.unibocconi.eu">IGIER</ExternalLink>{" "}
+                  and{" "}
+                  <ExternalLink href="https://baffi.unibocconi.eu/research-units/finafrica">
+                    FINAFRICA
+                  </ExternalLink>
+                  .
+                </p>
+                <p className="job-market-note">
+                  I will be on the 2026–27 academic job market.
+                </p>
+                <p>
+                  My primary fields of interest are organisational economics and
+                  management, and their applications to development economics and
+                  finance. I am interested in the role organisations play in economic
+                  development both in their own right and by contributing to broader
+                  social objectives, and how their internal organisation supports
+                  this. My research increasingly focuses on the role of the financial
+                  sector in this process.
+                </p>
+                <p>
+                  Many of my projects develop new (Bayesian) tools to measure
+                  management, such as the rules managers use to make decisions,
+                  management practices in banks, and management styles among young
+                  professionals.
+                </p>
+                <p>Always happy to talk about these topics, please reach out!</p>
+              </div>
+              <div className="contact">
+                <p>
+                  <strong>Email:</strong>{" "}
+                  <a href="mailto:tom.schwantje@unibocconi.it">
+                    tom.schwantje@unibocconi.it
+                  </a>
+                </p>
+                <p>
+                  <ExternalLink href="./files/Tom_Schwantje_CV.pdf">
+                    Curriculum Vitae
+                  </ExternalLink>
+                </p>
+              </div>
             </div>
           </div>
         </section>
+
+        <section id="job-market-paper" className="section section-heading">
+          <h2>Job Market Paper</h2>
+        </section>
+
+        {jobMarketPaper && <PaperEntry paper={jobMarketPaper} defaultOpen />}
 
         <section id="working-papers" className="section section-heading">
           <h2>Working papers</h2>
         </section>
 
         {papers.map((paper) => (
-          <article className="paper section" key={paper.title}>
-            <div className="paper-title-row">
-              <span className="paper-title">{paper.title}</span>
-              {paper.status && <span className="status">{paper.status}</span>}
-            </div>
-            <p className="paper-links">
-              {paper.links.map((link) => (
-                <ExternalLink href={link.href} key={link.label}>
-                  [{link.label}]
-                </ExternalLink>
-              ))}
-              {paper.appendix && (
-                <Link href="/banking-conflict-appendix/">[Online Appendix]</Link>
-              )}
-            </p>
-            {paper.authors && <p className="authors">{paper.authors}</p>}
-            <details>
-              <summary>
-                <span className="visually-hidden">
-                  Show details for {paper.title}
-                </span>
-              </summary>
-              <div className="paper-body">
-                <p className="presentations">
-                  <em>Presentations:</em> {paper.presentations}
-                </p>
-                <p className="abstract">
-                  <span>Abstract:</span> {paper.abstract}
-                </p>
-              </div>
-            </details>
-          </article>
+          <PaperEntry paper={paper} key={paper.title} />
         ))}
 
         <section id="work-in-progress" className="section wip">
           <h2>Selected Work in Progress</h2>
-          <div className="wip-item">
-            <h3>Management, Internet and Financial Technology Adoption</h3>
-            <p>with Nicola Limodio</p>
-          </div>
-          <div className="wip-item">
-            <h3>
-              Heterogeneity in Management Practices: A Bayesian Approach to
-              Identifying Complementarities
-            </h3>
+          <div className="wip-list">
+            <div className="wip-item">
+              <h3>Management, Internet and Financial Technology Adoption</h3>
+              <p>with Nicola Limodio</p>
+            </div>
+            <div className="wip-item">
+              <h3>
+                Heterogeneity in Management Practices: A Bayesian Approach to
+                Identifying Complementarities
+              </h3>
+            </div>
           </div>
         </section>
       </main>
